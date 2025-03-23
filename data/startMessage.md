@@ -1,7 +1,19 @@
-Bot Created Via [NFD](https://github.com/LloydAsp/nfd)
+广告投放 88折   点击下方链接即可🔗
+soso https://t.me/soso?start=usecode_huihuashi
 
-使用方法：
+jiso https://t.me/jiso?start=usecode_999999
 
-- 当其他用户给bot发消息，会被转发到bot创建者
-- 用户回复普通文字给转发的消息时，会回复到原消息发送者
-- 用户回复 `/block` ,  `/unblock` ,  `/checkblock` 等命令会执行相关指令， **不会** 回复到原消息发送者
+Super  t.me/SearcNBot?start=Promo-binding-huihuashi
+
+❇️Telegram 高级会员
+🔥  3月-----15u【秒开】      
+🔥  6月-----25u【秒开】  
+🔥  12月----35u【秒开】
+ 无需登录账号，只需要提供用户名即可
+
+🔥  僵尸粉🧟 ----- 25R/1000
+🔥  在线粉🧟 ----- 500R/1000
+🔥频道未来帖浏览量 ——- 1个月—- 3u/1000 
+telegram⭐️⭐️币 -----  2.5U/100⭐️币
+
+留言即可 
