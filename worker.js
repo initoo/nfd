@@ -46,7 +46,12 @@ function copyMessage(msg = {}){
 function forwardMessage(msg){
   return requestTelegram('forwardMessage', makeReqBody(msg))
 }
-
+ {
+  if (reply_markup) {
+    msg.reply_markup = reply_markup;
+  }
+  return requestTelegram('sendMessage', makeReqBody(msg));
+}
 /**
  * Wait for requests to the worker
  */
@@ -80,7 +85,42 @@ async function handleWebhook (event) {
 
   return new Response('Ok')
 }
+{
+  // Check secret
+  if (event.request.headers.get('X-Telegram-Bot-Api-Secret-Token') !== SECRET) {
+    return new Response('Unauthorized', { status: 403 })
+  }
 
+  // Read request body synchronously
+  const update = await event.request.json();
+  
+  // Deal with response asynchronously
+  event.waitUntil(onUpdate(update));
+
+  return new Response('Ok');
+}
+
+async function onUpdate (update) {
+  if ('message' in update) {
+    await onMessage(update.message);
+  } else if ('callback_query' in update) {
+    await onCallbackQuery(update.callback_query);
+  }
+}
+async function onCallbackQuery(callbackQuery) {
+  const chatId = callbackQuery.message.chat.id;
+  const data = callbackQuery.data;
+
+  if (data === 'input_text') {
+    await sendMessage({
+      chat_id: chatId,
+      text: '欢迎使用绘画机器人：'
+    });
+  }
+  
+
+  // 你可以在这里添加更多的按钮处理逻辑
+}
 /**
  * Handle incoming Update
  * https://core.telegram.org/bots/api#update
@@ -140,7 +180,29 @@ async function handleGuestMessage(message){
       text:'Your are blocked'
     })
   }
+{
+  if(message.text === '/start'){
+    let startMsg = await fetch(startMsgUrl).then(r => r.text());
+    
+    // 创建按钮
+    const inlineKeyboard = {
+      inline_keyboard: [
+        [
+          { text: '绘画师', callback_data: 'input_text' },
+          { text: 'https://t.me/huihuashi', url: 'https://t.me/huihuashi' }
+        ]
+      ]
+    };
 
+    return sendMessage({
+      chat_id: message.chat.id,
+      text: startMsg,
+      reply_markup: inlineKeyboard
+    });
+  }
+
+  // 其他消息处理逻辑...
+}
   let forwardReq = await forwardMessage({
     chat_id:ADMIN_UID,
     from_chat_id:message.chat.id,
